@@ -95,11 +95,13 @@
             <a href="#" class="text-2xl font-serif font-bold text-charcoal tracking-wider hover:text-gold transition-colors">HAZA AHELI</a>
             
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8 text-xs uppercase tracking-[0.2em] font-bold text-clay">
+            <div class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-[0.2em] font-bold text-clay">
                 <a href="#about" class="hover:text-gold transition-colors py-2">About</a>
                 <a href="#offerings" class="hover:text-gold transition-colors py-2">Offerings</a>
                 <a href="#vision" class="hover:text-gold transition-colors py-2 text-gold"><i class="fas fa-sparkles mr-1"></i>Vision AI</a>
+                <a href="#media" class="hover:text-gold transition-colors py-2">Media</a>
                 <a href="#booking" class="hover:text-gold transition-colors py-2">Booking</a>
+                <button onclick="toggleKeyModal()" class="hover:text-gold transition-colors text-charcoal/50 ml-4" title="API Settings"><i class="fas fa-cog text-lg"></i></button>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -113,10 +115,27 @@
                 <a href="#about" class="block hover:text-gold">About</a>
                 <a href="#offerings" class="block hover:text-gold">Offerings</a>
                 <a href="#vision" class="block text-gold">Vision AI</a>
+                <a href="#media" class="block hover:text-gold">Media</a>
                 <a href="#booking" class="block hover:text-gold">Booking</a>
+                <button onclick="toggleKeyModal()" class="text-left text-charcoal/50">API Settings <i class="fas fa-cog ml-2"></i></button>
             </div>
         </div>
     </nav>
+
+    <!-- API Key Modal -->
+    <div id="key-modal" class="fixed inset-0 bg-charcoal/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-sand p-8 max-w-md w-full shadow-2xl border border-gold relative">
+            <button onclick="toggleKeyModal()" class="absolute top-4 right-4 text-clay hover:text-charcoal"><i class="fas fa-times"></i></button>
+            <h3 class="font-serif text-2xl text-charcoal mb-4">Enable AI Features</h3>
+            <p class="text-xs text-charcoal/70 mb-4">To use the <strong>Vision Alchemist</strong> and <strong>Email Drafter</strong>, please enter your Gemini API Key. It will be stored locally in your browser.</p>
+            <input type="password" id="user-api-key" placeholder="Paste API Key here..." class="w-full bg-white border border-stone p-3 text-sm text-charcoal focus:border-gold focus:outline-none mb-4">
+            <div class="flex gap-4">
+                <button onclick="saveKey()" class="flex-1 bg-gold text-charcoal font-bold uppercase tracking-widest text-xs py-3 hover:bg-white transition-colors">Save Key</button>
+                <button onclick="clearKey()" class="flex-1 border border-clay text-clay font-bold uppercase tracking-widest text-xs py-3 hover:bg-clay hover:text-sand transition-colors">Clear</button>
+            </div>
+            <p class="text-[10px] text-center mt-4 text-charcoal/40">Don't have a key? <a href="https://aistudio.google.com/app/apikey" target="_blank" class="underline hover:text-gold">Get one here</a>.</p>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center bg-stone overflow-hidden">
@@ -199,7 +218,7 @@
                         </div>
                         <p class="text-xs text-clay uppercase tracking-widest font-bold mb-4">15 - 50 Minutes | Main Stage</p>
                         <p class="text-charcoal/80 text-sm leading-relaxed">
-                            A theatrical journey blending Fusion Bellydance, storytelling, and "Sacred Bass" music. Features elaborate costuming with subtle lighting elements and live percussion/didgeridoo.
+                            A theatrical journey blending Fusion Bellydance, storytelling, and "Sacred Bass" music. Features custom LED costumes and live percussion/didgeridoo.
                         </p>
                     </div>
 
@@ -244,7 +263,7 @@
                         <ul class="list-disc list-inside text-sm text-charcoal/80 space-y-2">
                             <li>Elaborate custom costuming</li>
                             <li>Live Didgeridoo & Percussion</li>
-                            <li>Subtle integrated lighting</li>
+                            <li>Programmed LED Integration</li>
                         </ul>
                     </div>
                 </div>
@@ -304,6 +323,43 @@
         </div>
     </section>
 
+    <!-- NEW: Visual Immersion (Media) Section -->
+    <section id="media" class="py-24 bg-stone/20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif text-charcoal mb-4">Visual Immersion</h2>
+                <div class="w-20 h-1 bg-gold mx-auto mb-6"></div>
+                <p class="text-charcoal/70 max-w-2xl mx-auto">
+                    Witness the sacred movement and atmospheric depth of our live performances.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Video 1: Temple Melody -->
+                <div class="group relative aspect-video bg-black shadow-2xl border-4 border-stone transform transition-transform hover:scale-[1.01]">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/AcS1xtHw14Y?rel=0" title="Haza Aheli Performance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2">
+                        <p class="font-serif text-charcoal italic text-lg">Temple Melody Performance</p>
+                    </div>
+                </div>
+
+                <!-- Video 2: Mizu Project -->
+                <div class="group relative aspect-video bg-black shadow-2xl border-4 border-stone transform transition-transform hover:scale-[1.01]">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/njhNEz3LT7Y?rel=0" title="Mizu Project" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2">
+                        <p class="font-serif text-charcoal italic text-lg">The Mizu Project</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-20">
+                 <a href="https://www.youtube.com/@HazaAhelia" target="_blank" class="inline-flex items-center gap-2 text-clay hover:text-gold transition-colors uppercase tracking-widest text-xs font-bold border-b border-clay hover:border-gold pb-1">
+                    View Full Archive <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Credentials Section -->
     <section id="credentials" class="py-24 bg-sand">
         <div class="container mx-auto px-6">
@@ -356,7 +412,7 @@
                             <i class="fas fa-check-circle text-gold mt-1 mr-4 text-xl"></i>
                             <div>
                                 <strong class="text-charcoal block mb-1 font-serif text-lg">High Production Value</strong>
-                                <p class="text-sm text-charcoal/70">Distinct visual identity, professional costuming with integrated lighting elements, and musical direction (Tipper, CloZee style).</p>
+                                <p class="text-sm text-charcoal/70">Distinct visual identity, professional LED costuming, and musical direction (Tipper, CloZee style).</p>
                             </div>
                         </div>
                     </div>
@@ -434,7 +490,7 @@
                         <i id="tech-icon" class="fas fa-plus group-hover:rotate-90 transition-transform"></i>
                     </button>
                     <div id="tech-content" class="hidden py-6 text-sm text-charcoal/80 space-y-3 bg-stone/10 px-4 mt-2">
-                        <p class="flex gap-2"><strong class="min-w-[80px]">Lighting:</strong> <span>Collaboration with venue technician required. Dark environments enhance the subtle integrated lighting elements.</span></p>
+                        <p class="flex gap-2"><strong class="min-w-[80px]">Lighting:</strong> <span>Collaboration with venue technician required. Dark environments preferred for LED impact.</span></p>
                         <p class="flex gap-2"><strong class="min-w-[80px]">Audio:</strong> <span>Professional PA with high-fidelity sub-bass response (Tipper/Bass music requirements). Monitors for dancers.</span></p>
                         <p class="flex gap-2"><strong class="min-w-[80px]">Stage:</strong> <span>Clear, flat surface. Minimum dimensions vary by crew size (approx 6m x 4m ideal).</span></p>
                     </div>
@@ -465,11 +521,51 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // --- GEMINI API CONFIG ---
-        const apiKey = ""; // The key is injected by the environment
+        // --- API KEY & STORAGE LOGIC ---
+        let apiKey = "";
+
+        function checkStoredKey() {
+            const stored = localStorage.getItem('gemini_api_key');
+            if(stored) {
+                apiKey = stored;
+                document.getElementById('user-api-key').value = stored;
+                console.log("API Key loaded from storage");
+            }
+        }
+
+        function toggleKeyModal() {
+            const modal = document.getElementById('key-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function saveKey() {
+            const input = document.getElementById('user-api-key').value.trim();
+            if(input) {
+                apiKey = input;
+                localStorage.setItem('gemini_api_key', input);
+                alert("API Key saved! AI features enabled.");
+                toggleKeyModal();
+            } else {
+                alert("Please enter a valid key.");
+            }
+        }
+
+        function clearKey() {
+            localStorage.removeItem('gemini_api_key');
+            apiKey = "";
+            document.getElementById('user-api-key').value = "";
+            alert("API Key cleared.");
+        }
 
         // --- GEMINI FEATURE 1: VISION ALCHEMIST ---
         async function generateVision() {
+            // Check for key first
+            if(!apiKey) {
+                toggleKeyModal();
+                alert("Please enter your API Key first to use this feature.");
+                return;
+            }
+
             const name = document.getElementById('ai-event-name').value;
             const vibe = document.getElementById('ai-event-vibe').value;
             const outputDiv = document.getElementById('ai-vision-output');
@@ -489,7 +585,7 @@
             outputDiv.classList.remove('hidden');
             outputText.innerHTML = "Consulting the creative oracle...";
 
-            const prompt = `You are the Creative Director for Haza Aheli, a world-class Tribal Fusion dancer and choreographer (styles: Sacred Bass, Neo-Tribal, Glitch-Hop, Ritual). She performs with elaborate costumes featuring subtle lighting elements, live didgeridoo, and fire. 
+            const prompt = `You are the Creative Director for Haza Aheli, a world-class Tribal Fusion dancer and choreographer (styles: Sacred Bass, Neo-Tribal, Glitch-Hop, Ritual). She performs with LED costumes, live didgeridoo, and fire. 
             
             A festival organizer wants to book her.
             Event Name: "${name}"
@@ -508,12 +604,15 @@
                 });
                 
                 const data = await response.json();
-                const result = data.candidates[0].content.parts[0].text;
                 
+                if (data.error) {
+                    throw new Error(data.error.message || "API Error");
+                }
+
+                const result = data.candidates[0].content.parts[0].text;
                 outputText.innerHTML = result;
             } catch (error) {
-                outputText.innerHTML = "The connection to the oracle was interrupted. Please try again.";
-                console.error(error);
+                outputText.innerHTML = `Error: ${error.message}. Please check your API key.`;
             } finally {
                 btn.innerHTML = originalBtnText;
                 btn.classList.remove('opacity-75', 'cursor-not-allowed');
@@ -522,6 +621,13 @@
 
         // --- GEMINI FEATURE 2: EMAIL DRAFTER ---
         async function draftEmail() {
+             // Check for key first
+             if(!apiKey) {
+                toggleKeyModal();
+                alert("Please enter your API Key first to use this feature.");
+                return;
+            }
+
             const stage = document.getElementById('check-stage').checked;
             const workshop = document.getElementById('check-workshop').checked;
             const ecstatic = document.getElementById('check-ecstatic').checked;
@@ -568,11 +674,15 @@
                 });
 
                 const data = await response.json();
-                const result = data.candidates[0].content.parts[0].text;
                 
+                if (data.error) {
+                    throw new Error(data.error.message || "API Error");
+                }
+
+                const result = data.candidates[0].content.parts[0].text;
                 outputText.value = result;
             } catch (error) {
-                outputText.value = "Error generating draft.";
+                outputText.value = `Error: ${error.message}`;
             } finally {
                 btn.innerHTML = originalBtnText;
             }
@@ -624,7 +734,7 @@
                 details: [
                     "Elaborate Custom Costuming",
                     "Live Didgeridoo & Percussion",
-                    "Subtle Integrated Lighting",
+                    "Programmed LED Integration",
                     "Fire Performance Options"
                 ],
                 // Data for Radar Chart: Energy, Visuals, Interaction, Spirituality, Tradition
@@ -818,6 +928,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateBio('short'); // Load default bio
             initChart(); // Initialize chart
+            checkStoredKey(); // Check for API key
         });
 
     </script>
