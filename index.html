@@ -101,6 +101,7 @@
                 <a href="#vision" class="hover:text-gold transition-colors py-2 text-gold"><i class="fas fa-sparkles mr-1"></i>Vision AI</a>
                 <a href="#media" class="hover:text-gold transition-colors py-2">Media</a>
                 <a href="#booking" class="hover:text-gold transition-colors py-2">Booking</a>
+                <button onclick="toggleKeyModal()" class="hover:text-gold transition-colors text-charcoal/50 ml-4" title="API Settings"><i class="fas fa-cog text-lg"></i></button>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -116,9 +117,26 @@
                 <a href="#vision" class="block text-gold">Vision AI</a>
                 <a href="#media" class="block hover:text-gold">Media</a>
                 <a href="#booking" class="block hover:text-gold">Booking</a>
+                <button onclick="toggleKeyModal()" class="text-left text-charcoal/50">API Settings <i class="fas fa-cog ml-2"></i></button>
             </div>
         </div>
     </nav>
+
+    <!-- API Key Modal -->
+    <div id="key-modal" class="fixed inset-0 bg-charcoal/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-sand p-8 max-w-md w-full shadow-2xl border border-gold relative">
+            <button onclick="toggleKeyModal()" class="absolute top-4 right-4 text-clay hover:text-charcoal"><i class="fas fa-times"></i></button>
+            <h3 class="font-serif text-2xl text-charcoal mb-4">Enable AI Features</h3>
+            <p class="text-xs text-charcoal/70 mb-4">To use the <strong>Vision Alchemist</strong> and <strong>Email Drafter</strong>, please enter your Gemini API Key. It will be stored locally in your browser.</p>
+            <p class="text-xs text-clay font-bold mb-4" id="hardcoded-msg" style="display:none;">A site-wide key is currently active.</p>
+            <input type="password" id="user-api-key" placeholder="Paste API Key here..." class="w-full bg-white border border-stone p-3 text-sm text-charcoal focus:border-gold focus:outline-none mb-4">
+            <div class="flex gap-4">
+                <button onclick="saveKey()" class="flex-1 bg-gold text-charcoal font-bold uppercase tracking-widest text-xs py-3 hover:bg-white transition-colors">Save Key</button>
+                <button onclick="clearKey()" class="flex-1 border border-clay text-clay font-bold uppercase tracking-widest text-xs py-3 hover:bg-clay hover:text-sand transition-colors">Clear</button>
+            </div>
+            <p class="text-[10px] text-center mt-4 text-charcoal/40">Don't have a key? <a href="https://aistudio.google.com/app/apikey" target="_blank" class="underline hover:text-gold">Get one here</a>.</p>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center bg-stone overflow-hidden">
@@ -313,24 +331,32 @@
                 <h2 class="text-4xl md:text-5xl font-serif text-charcoal mb-4">Visual Immersion</h2>
                 <div class="w-20 h-1 bg-gold mx-auto mb-6"></div>
                 <p class="text-charcoal/70 max-w-2xl mx-auto">
-                    Witness the sacred movement and atmospheric depth of our live performances.
+                    Witness the sacred movement and atmospheric depth of our live performances and workshops.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Video 1: Temple Melody -->
                 <div class="group relative aspect-video bg-black shadow-2xl border-4 border-stone transform transition-transform hover:scale-[1.01]">
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/AcS1xtHw14Y?rel=0" title="Haza Aheli Performance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2">
-                        <p class="font-serif text-charcoal italic text-lg">Temple Melody Performance</p>
+                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2 bg-sand/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none">
+                        <p class="font-serif text-charcoal italic text-lg">Temple Melody</p>
                     </div>
                 </div>
 
                 <!-- Video 2: Mizu Project -->
                 <div class="group relative aspect-video bg-black shadow-2xl border-4 border-stone transform transition-transform hover:scale-[1.01]">
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/njhNEz3LT7Y?rel=0" title="Mizu Project" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2">
+                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2 bg-sand/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none">
                         <p class="font-serif text-charcoal italic text-lg">The Mizu Project</p>
+                    </div>
+                </div>
+
+                <!-- Video 3: Boom Festival Workshop -->
+                <div class="group relative aspect-video bg-black shadow-2xl border-4 border-stone transform transition-transform hover:scale-[1.01]">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/OO3_MEV8SmI?rel=0" title="Boom Festival Workshop" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="absolute -bottom-16 md:-bottom-12 left-0 w-full text-center p-2 bg-sand/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none">
+                        <p class="font-serif text-charcoal italic text-lg">Boom Festival Workshop</p>
                     </div>
                 </div>
             </div>
@@ -355,20 +381,6 @@
                             <div>
                                 <strong class="block text-xl font-serif text-charcoal">Burning Man</strong>
                                 <span class="text-xs uppercase tracking-widest text-clay">USA | Black Rock City</span>
-                            </div>
-                        </li>
-                        <li class="flex items-center border-b border-charcoal/10 pb-6 group hover:pl-2 transition-all cursor-default">
-                            <span class="text-gold text-2xl w-12 group-hover:scale-110 transition-transform"><i class="fas fa-tree"></i></span>
-                            <div>
-                                <strong class="block text-xl font-serif text-charcoal">Envision Festival</strong>
-                                <span class="text-xs uppercase tracking-widest text-clay">Costa Rica | Uvita</span>
-                            </div>
-                        </li>
-                        <li class="flex items-center border-b border-charcoal/10 pb-6 group hover:pl-2 transition-all cursor-default">
-                            <span class="text-gold text-2xl w-12 group-hover:scale-110 transition-transform"><i class="fas fa-om"></i></span>
-                            <div>
-                                <strong class="block text-xl font-serif text-charcoal">Boom Festival</strong>
-                                <span class="text-xs uppercase tracking-widest text-clay">Portugal | Idanha-a-Nova</span>
                             </div>
                         </li>
                     </ul>
@@ -399,6 +411,32 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Instagram Feature Section -->
+    <section id="instagram" class="py-20 bg-white border-y border-stone">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-serif text-charcoal mb-2">The Daily Ritual</h2>
+            <div class="w-16 h-1 bg-gold mx-auto mb-8"></div>
+            <p class="text-charcoal/70 max-w-xl mx-auto mb-10">
+                Follow the journey behind the scenes. Daily inspirations, tour updates, and the "Fusion Illusion" in practice.
+            </p>
+            
+            <div class="inline-block relative group">
+                <!-- Abstract phone outline -->
+                <div class="absolute inset-0 border-2 border-gold rounded-3xl transform rotate-3 scale-105 opacity-30 group-hover:rotate-6 transition-transform duration-500"></div>
+                
+                <div class="relative bg-sand p-10 md:p-14 border border-stone shadow-xl rounded-sm max-w-md mx-auto">
+                    <div class="text-4xl text-charcoal mb-2"><i class="fab fa-instagram"></i></div>
+                    <h3 class="font-serif text-2xl text-charcoal mb-1">@haza_dance</h3>
+                    <p class="text-xs uppercase tracking-widest text-clay mb-8">Official Instagram</p>
+                    
+                    <a href="https://www.instagram.com/haza_dance/" target="_blank" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:shadow-lg transform hover:-translate-y-1 transition-all">
+                        Follow the Magic
+                    </a>
                 </div>
             </div>
         </div>
@@ -504,11 +542,62 @@
 
     <!-- JavaScript Logic -->
     <script>
-        let apiKey = "AIzaSyD1fV_8Id_QlQsZrEk4XwWC7i76q0Y0-14";
+        // --- API KEY & STORAGE LOGIC ---
+        // To hardcode the key for public use (WARNING: EXPOSES KEY), paste it inside the quotes below.
+        // Example: const hardcodedKey = "AIzaSy...";
+        const hardcodedKey = "AIzaSyD1fV_8Id_QlQsZrEk4XwWC7i76q0Y0-14"; 
+
+        let apiKey = hardcodedKey;
+
+        function checkStoredKey() {
+            // First check if user has hardcoded a key
+            if (hardcodedKey) {
+                apiKey = hardcodedKey;
+                document.getElementById('user-api-key').value = "HARDCODED_KEY_ACTIVE";
+                document.getElementById('user-api-key').disabled = true;
+                document.getElementById('hardcoded-msg').style.display = 'block';
+                console.log("Using hardcoded API Key");
+                return;
+            }
+
+            // Fallback to local storage
+            const stored = localStorage.getItem('gemini_api_key');
+            if(stored) {
+                apiKey = stored;
+                document.getElementById('user-api-key').value = stored;
+                console.log("API Key loaded from storage");
+            }
+        }
+
+        function toggleKeyModal() {
+            const modal = document.getElementById('key-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function saveKey() {
+            const input = document.getElementById('user-api-key').value.trim();
+            if(input) {
+                apiKey = input;
+                localStorage.setItem('gemini_api_key', input);
+                alert("API Key saved! AI features enabled.");
+                toggleKeyModal();
+            } else {
+                alert("Please enter a valid key.");
+            }
+        }
+
+        function clearKey() {
+            localStorage.removeItem('gemini_api_key');
+            apiKey = "";
+            document.getElementById('user-api-key').value = "";
+            alert("API Key cleared.");
+        }
 
         // --- GEMINI FEATURE 1: VISION ALCHEMIST ---
         async function generateVision() {
+            // Check for key first
             if(!apiKey) {
+                toggleKeyModal();
                 alert("Please enter your API Key first to use this feature.");
                 return;
             }
@@ -568,7 +657,9 @@
 
         // --- GEMINI FEATURE 2: EMAIL DRAFTER ---
         async function draftEmail() {
+             // Check for key first
              if(!apiKey) {
+                toggleKeyModal();
                 alert("Please enter your API Key first to use this feature.");
                 return;
             }
@@ -873,6 +964,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateBio('short'); // Load default bio
             initChart(); // Initialize chart
+            checkStoredKey(); // Check for API key
         });
 
     </script>
