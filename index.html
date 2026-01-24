@@ -101,7 +101,6 @@
                 <a href="#vision" class="hover:text-gold transition-colors py-2 text-gold"><i class="fas fa-sparkles mr-1"></i>Vision AI</a>
                 <a href="#media" class="hover:text-gold transition-colors py-2">Media</a>
                 <a href="#booking" class="hover:text-gold transition-colors py-2">Booking</a>
-                <button onclick="toggleKeyModal()" class="hover:text-gold transition-colors text-charcoal/50 ml-4" title="API Settings"><i class="fas fa-cog text-lg"></i></button>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -117,25 +116,9 @@
                 <a href="#vision" class="block text-gold">Vision AI</a>
                 <a href="#media" class="block hover:text-gold">Media</a>
                 <a href="#booking" class="block hover:text-gold">Booking</a>
-                <button onclick="toggleKeyModal()" class="text-left text-charcoal/50">API Settings <i class="fas fa-cog ml-2"></i></button>
             </div>
         </div>
     </nav>
-
-    <!-- API Key Modal -->
-    <div id="key-modal" class="fixed inset-0 bg-charcoal/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
-        <div class="bg-sand p-8 max-w-md w-full shadow-2xl border border-gold relative">
-            <button onclick="toggleKeyModal()" class="absolute top-4 right-4 text-clay hover:text-charcoal"><i class="fas fa-times"></i></button>
-            <h3 class="font-serif text-2xl text-charcoal mb-4">Enable AI Features</h3>
-            <p class="text-xs text-charcoal/70 mb-4">To use the <strong>Vision Alchemist</strong> and <strong>Email Drafter</strong>, please enter your Gemini API Key. It will be stored locally in your browser.</p>
-            <input type="password" id="user-api-key" placeholder="Paste API Key here..." class="w-full bg-white border border-stone p-3 text-sm text-charcoal focus:border-gold focus:outline-none mb-4">
-            <div class="flex gap-4">
-                <button onclick="saveKey()" class="flex-1 bg-gold text-charcoal font-bold uppercase tracking-widest text-xs py-3 hover:bg-white transition-colors">Save Key</button>
-                <button onclick="clearKey()" class="flex-1 border border-clay text-clay font-bold uppercase tracking-widest text-xs py-3 hover:bg-clay hover:text-sand transition-colors">Clear</button>
-            </div>
-            <p class="text-[10px] text-center mt-4 text-charcoal/40">Don't have a key? <a href="https://aistudio.google.com/app/apikey" target="_blank" class="underline hover:text-gold">Get one here</a>.</p>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center bg-stone overflow-hidden">
@@ -521,47 +504,11 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // --- API KEY & STORAGE LOGIC ---
         let apiKey = "AIzaSyD1fV_8Id_QlQsZrEk4XwWC7i76q0Y0-14";
-
-        function checkStoredKey() {
-            const stored = localStorage.getItem('gemini_api_key');
-            if(stored) {
-                apiKey = stored;
-                document.getElementById('user-api-key').value = stored;
-                console.log("API Key loaded from storage");
-            }
-        }
-
-        function toggleKeyModal() {
-            const modal = document.getElementById('key-modal');
-            modal.classList.toggle('hidden');
-        }
-
-        function saveKey() {
-            const input = document.getElementById('user-api-key').value.trim();
-            if(input) {
-                apiKey = input;
-                localStorage.setItem('gemini_api_key', input);
-                alert("API Key saved! AI features enabled.");
-                toggleKeyModal();
-            } else {
-                alert("Please enter a valid key.");
-            }
-        }
-
-        function clearKey() {
-            localStorage.removeItem('gemini_api_key');
-            apiKey = "";
-            document.getElementById('user-api-key').value = "";
-            alert("API Key cleared.");
-        }
 
         // --- GEMINI FEATURE 1: VISION ALCHEMIST ---
         async function generateVision() {
-            // Check for key first
             if(!apiKey) {
-                toggleKeyModal();
                 alert("Please enter your API Key first to use this feature.");
                 return;
             }
@@ -621,9 +568,7 @@
 
         // --- GEMINI FEATURE 2: EMAIL DRAFTER ---
         async function draftEmail() {
-             // Check for key first
              if(!apiKey) {
-                toggleKeyModal();
                 alert("Please enter your API Key first to use this feature.");
                 return;
             }
@@ -928,7 +873,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateBio('short'); // Load default bio
             initChart(); // Initialize chart
-            checkStoredKey(); // Check for API key
         });
 
     </script>
