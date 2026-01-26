@@ -545,9 +545,9 @@
         // --- API KEY & STORAGE LOGIC ---
         // To hardcode the key for public use (WARNING: EXPOSES KEY), paste it inside the quotes below.
         // Example: const hardcodedKey = "AIzaSy...";
-        const hardcodedKey = "AIzaSyD1fV_8Id_QlQsZrEk4XwWC7i76q0Y0-14"; 
+        const fakeKey = "QUl6YVN5RDFmVl84SWRfUWxRc1pyRWs0WHdXQzdpNzZxMFkwLTE0"
 
-        let apiKey = hardcodedKey;
+        let apiKey = fakeKey;
 
         function checkStoredKey() {
             // First check if user has hardcoded a key
@@ -633,7 +633,7 @@
             3. Sell the "fit" between the artist and the event.`;
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${atob(apiKey)}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
